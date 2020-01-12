@@ -1,22 +1,22 @@
 // Global parameters //<>// //<>//
 
-int blockwidth = 50;
-int blockheight = 75;
+int blockwidth = 48;
+int blockheight = 72;
 
-int numcols = 4;
+int numcols = 8;
 int radius = 0;
 int maxtwist = 8;
 
-int yOffset = 2;
+int yOffset = 0;
 
-int yLength = 20;
+int yLength = 60;
 
 Column[] columns = new Column[numcols];
 
 
 void setup() {
   smooth();
-  size(1200, 900);
+  size(2400, 1800);
   //fullScreen();
   // Parameters go inside the parentheses when the object is constructed.
   for (int i = 0; i < numcols; i = i+1) {
@@ -53,6 +53,7 @@ void keyPressed() {
 // No matter how many cookies we make, only one cookie cutter is needed.
 class Column { 
   int index;
+  int stepnum = 0;
   color BG, FG;  
   float xpos, xflipped, ypos, yflipped;
   float xend, xflippedend, yend, yflippedend;
@@ -123,6 +124,7 @@ class Column {
     //}
     yend = yend - blockheight;
     yflippedend = yflippedend - blockheight;
+    stepnum = stepnum + 1;
   }
 
 
@@ -141,25 +143,41 @@ class Column {
     float ypos = Yadjusted(this.xpos, this.ypos);
     float xflipped = Xadjusted(this.xflipped, this.yflippedend);
     float yflippedend = Yadjusted(this.xflipped, this.yflippedend);
-    fill(BG);
-    stroke(FG);
+    if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) { //cast boolean Zslash to integer
+      fill(BG);  
+      stroke(FG);
+    } else {
+      fill(FG);
+      stroke(BG);
+    }
     strokeWeight(1);
     rect(xpos, ypos, blockwidth, blockheight);
     rect(xflipped-blockwidth, yflippedend-blockheight, blockwidth, blockheight); 
-    strokeWeight(4);
+    //noStroke();
+    if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
+      fill(FG);  
+      stroke(BG);
+    } else {
+      fill(BG);
+      stroke(FG);
+    }
     if (Zslash) {
-      line(xpos, ypos, xpos+blockwidth, ypos+blockheight);
+      triangle(xpos+blockwidth, ypos, xpos+blockwidth, ypos+blockheight/2, xpos+blockwidth/2, ypos);  //corners of rectangle
+      triangle(xpos, ypos+blockheight, xpos, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight);  
+      //line(xpos, ypos, xpos+blockwidth, ypos+blockheight);
       line(xflipped, yflippedend, xflipped-blockwidth, yflippedend-blockheight);
     } else {
-      line(xpos+blockwidth, ypos, xpos, ypos+blockheight);
+      triangle(xpos, ypos, xpos, ypos+blockheight/2, xpos+blockwidth/2, ypos);
+      triangle(xpos+blockwidth, ypos+blockheight, xpos+blockwidth, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight);  
+      //line(xpos+blockwidth, ypos, xpos, ypos+blockheight);
       line(xflipped-blockwidth, yflippedend, xflipped, yflippedend-blockheight);
     }
     fill(FG);
-    textSize(24);  
-    textAlign(LEFT, BOTTOM);
-    text(str(twist), xpos, ypos+blockheight);
-    textAlign(RIGHT, BOTTOM);
-    text(str(effectiveTwist), xpos+blockwidth, ypos+blockheight);
+    //textSize(24);  
+    //textAlign(LEFT, BOTTOM);
+    //text(str(twist), xpos, ypos+blockheight);
+    //textAlign(RIGHT, BOTTOM);
+    //text(str(effectiveTwist), xpos+blockwidth, ypos+blockheight);
   }
 
   void rightDisplay() {
