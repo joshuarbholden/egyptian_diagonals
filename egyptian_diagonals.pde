@@ -48,6 +48,10 @@ void keyPressed() {
   }
 }
 
+void parallelogram(float x, float y, float x1, float y1, float x2, float y2) {
+  quad(x, y, x+x1, y+y1, x+x1+x2, y+y1+y2, x+x2, y+y2);
+}
+
 
 // Even though there are multiple objects, we still only need one class. 
 // No matter how many cookies we make, only one cookie cutter is needed.
@@ -165,10 +169,9 @@ class Column {
         fill(BG);
         stroke(FG);
       }
-      // quad(xpos+blockwidth, ypos+blockheight/2, xpos, ypos-blockheight/2, xpos, ypos+blockheight/2, xpos+blockwidth, ypos+3*blockheight/2);  //parallelogram
-      quad(xpos+blockwidth, ypos+blockheight, xpos+blockwidth/2, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight, xpos+blockwidth, ypos+3*blockheight/2);  //little parallelogram
-      quad(xpos+blockwidth, ypos+blockheight/2, xpos+blockwidth/2, ypos, xpos+blockwidth/2, ypos+blockheight/2, xpos+blockwidth, ypos+blockheight);  //little parallelogram
-      quad(xpos+blockwidth/2, ypos+blockheight/2, xpos, ypos, xpos, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight);  //little parallelogram
+      parallelogram(xpos+blockwidth/2, ypos+blockheight/2, blockwidth/2, blockheight/2, 0, blockheight/2); //little 
+      parallelogram(xpos+blockwidth/2, ypos, blockwidth/2, blockheight/2, 0, blockheight/2); //little     
+      parallelogram(xpos, ypos, blockwidth/2, blockheight/2, 0, blockheight/2); //little     
       rect(xpos+blockwidth/2, ypos+blockheight, blockwidth/2, blockheight/2); //background 
       line(xflipped, yflippedend, xflipped-blockwidth, yflippedend-blockheight);
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
@@ -178,10 +181,9 @@ class Column {
         fill(FG);
         stroke(BG);
       }
-      quad(xpos+blockwidth/2, ypos+blockheight, xpos, ypos+blockheight/2, xpos, ypos+blockheight, xpos+blockwidth/2, ypos+3*blockheight/2);  //little parallelogram
+      parallelogram(xpos, ypos+blockheight/2, blockwidth/2, blockheight/2, 0, blockheight/2); //little 
       rect(xpos, ypos+blockheight, blockwidth/2, blockheight/2); //background
     } else {
-      // quad(xpos, ypos+blockheight/2, xpos+blockwidth, ypos-blockheight/2, xpos+blockwidth, ypos+blockheight/2, xpos, ypos+3*blockheight/2);  //parallelogram
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
         fill(FG);  
         stroke(BG);
@@ -189,9 +191,9 @@ class Column {
         fill(BG);
         stroke(FG);
       }
-      quad(xpos+blockwidth/2, ypos+blockheight/2, xpos+blockwidth, ypos, xpos+blockwidth, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight);  //little parallelogram
-      quad(xpos, ypos+blockheight, xpos+blockwidth/2, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight, xpos, ypos+3*blockheight/2);  //little parallelogram
-      quad(xpos+blockwidth/2, ypos+blockheight, xpos+blockwidth, ypos+blockheight/2, xpos+blockwidth, ypos+blockheight, xpos+blockwidth/2, ypos+3*blockheight/2);  //little parallelogram
+      parallelogram(xpos+blockwidth/2, ypos+blockheight/2, blockwidth/2, -blockheight/2, 0, blockheight/2); //little 
+      parallelogram(xpos, ypos+blockheight, blockwidth/2, -blockheight/2, 0, blockheight/2); //little 
+      parallelogram(xpos+blockwidth/2, ypos+blockheight, blockwidth/2, -blockheight/2, 0, blockheight/2); //little 
       rect(xpos+blockwidth/2, ypos+blockheight, blockwidth/2, blockheight/2); //background 
       rect(xpos, ypos+blockheight, blockwidth/2, blockheight/2); //background
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
@@ -201,7 +203,7 @@ class Column {
         fill(FG);
         stroke(BG);
       }
-      quad(xpos, ypos+blockheight/2, xpos+blockwidth/2, ypos, xpos+blockwidth/2, ypos+blockheight/2, xpos, ypos+blockheight);  //little parallelogram
+      parallelogram(xpos, ypos+blockheight/2, blockwidth/2, -blockheight/2, 0, blockheight/2); //little         
       line(xflipped-blockwidth, yflippedend, xflipped, yflippedend-blockheight);
     }
     noFill();
