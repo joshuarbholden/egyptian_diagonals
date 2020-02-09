@@ -102,8 +102,8 @@ class Column {
 
   void setTwist() {
     effectiveTwist = nbhdTwist(radius);
-     if (random(0, 1)<threshhold(effectiveTwist)) {
-   // if (floor(stepnum)/4 % 2 == 0) {  
+    if (random(0, 1)<threshhold(effectiveTwist)) {
+      // if (floor(stepnum)/4 % 2 == 0) {  
       Zslash = true;
       twist = twist + 1;
     } else {
@@ -154,7 +154,7 @@ class Column {
     strokeWeight(1);
     //rect(xpos, ypos+blockheight/2, blockwidth, blockheight); //background 
     noFill(); //***temp!
-    rect(xpos, ypos, blockwidth, blockheight); //outline 
+    //   rect(xpos, ypos, blockwidth, blockheight); //outline 
     rect(xflipped-blockwidth, yflippedend-blockheight, blockwidth, blockheight); 
     //noStroke();
     if (Zslash) {
@@ -169,6 +169,7 @@ class Column {
       quad(xpos+blockwidth, ypos+blockheight, xpos+blockwidth/2, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight, xpos+blockwidth, ypos+3*blockheight/2);  //little parallelogram
       quad(xpos+blockwidth, ypos+blockheight/2, xpos+blockwidth/2, ypos, xpos+blockwidth/2, ypos+blockheight/2, xpos+blockwidth, ypos+blockheight);  //little parallelogram
       quad(xpos+blockwidth/2, ypos+blockheight/2, xpos, ypos, xpos, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight);  //little parallelogram
+      rect(xpos+blockwidth/2, ypos+blockheight, blockwidth/2, blockheight/2); //background 
       line(xflipped, yflippedend, xflipped-blockwidth, yflippedend-blockheight);
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
         fill(BG);  
@@ -178,6 +179,7 @@ class Column {
         stroke(BG);
       }
       quad(xpos+blockwidth/2, ypos+blockheight, xpos, ypos+blockheight/2, xpos, ypos+blockheight, xpos+blockwidth/2, ypos+3*blockheight/2);  //little parallelogram
+      rect(xpos, ypos+blockheight, blockwidth/2, blockheight/2); //background
     } else {
       // quad(xpos, ypos+blockheight/2, xpos+blockwidth, ypos-blockheight/2, xpos+blockwidth, ypos+blockheight/2, xpos, ypos+3*blockheight/2);  //parallelogram
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
@@ -190,6 +192,8 @@ class Column {
       quad(xpos+blockwidth/2, ypos+blockheight/2, xpos+blockwidth, ypos, xpos+blockwidth, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight);  //little parallelogram
       quad(xpos, ypos+blockheight, xpos+blockwidth/2, ypos+blockheight/2, xpos+blockwidth/2, ypos+blockheight, xpos, ypos+3*blockheight/2);  //little parallelogram
       quad(xpos+blockwidth/2, ypos+blockheight, xpos+blockwidth, ypos+blockheight/2, xpos+blockwidth, ypos+blockheight, xpos+blockwidth/2, ypos+3*blockheight/2);  //little parallelogram
+      rect(xpos+blockwidth/2, ypos+blockheight, blockwidth/2, blockheight/2); //background 
+      rect(xpos, ypos+blockheight, blockwidth/2, blockheight/2); //background
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
         fill(BG);  
         stroke(FG);
@@ -200,6 +204,8 @@ class Column {
       quad(xpos, ypos+blockheight/2, xpos+blockwidth/2, ypos, xpos+blockwidth/2, ypos+blockheight/2, xpos, ypos+blockheight);  //little parallelogram
       line(xflipped-blockwidth, yflippedend, xflipped, yflippedend-blockheight);
     }
+    noFill();
+    // rect(xpos, ypos, blockwidth, blockheight); //outline 
     fill(FG);
     //textSize(24);  
     //textAlign(LEFT, BOTTOM);
