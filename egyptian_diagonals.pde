@@ -5,7 +5,7 @@ int blockheight = 72;
 
 int numcols = 8;
 int radius = 0;
-int maxtwist = 12;
+int maxtwist = 4;
 
 int yOffset = 0;
 
@@ -16,14 +16,14 @@ Column[] columns = new Column[numcols];
 
 void setup() {
   smooth();
-  size(1800, 900);
+  size(384, 864);
   //fullScreen();
   // Parameters go inside the parentheses when the object is constructed.
   for (int i = 0; i < numcols; i = i+1) {
     columns[i] = new Column(i, color(255, 255, 0), color(50, 100, 50), i*blockwidth, (2*numcols-i)*blockwidth, 0, yOffset*blockheight, yLength*blockheight-1);
     println(columns[i].ypos, columns[i].yflipped, columns[i].yend, columns[i].yflippedend);
   }
-  noLoop();
+  //  noLoop();
 }
 
 
@@ -37,7 +37,7 @@ void draw() {
       columns[i].rightDisplay();
     }
   }
-  noLoop();
+  // noLoop();
 }
 
 void keyPressed() {
