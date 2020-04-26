@@ -1,4 +1,4 @@
-// Global parameters //<>// //<>//
+// Global parameters //<>// //<>// //<>// //<>//
 
 int blockwidth = 48;
 int blockheight = 72;
@@ -9,21 +9,22 @@ int maxtwist = 4;
 
 int yOffset = 0;
 
-int yLength = 24;
+int yLength = 20;
 
 Column[] columns = new Column[numcols];
 
 
 void setup() {
   smooth();
-  size(384, 864);
+ // size(384, 864);
+  size(1500, 864);
   //fullScreen();
   // Parameters go inside the parentheses when the object is constructed.
   for (int i = 0; i < numcols; i = i+1) {
     columns[i] = new Column(i, color(255, 255, 0), color(50, 100, 50), i*blockwidth, (2*numcols-i)*blockwidth, 0, yOffset*blockheight, yLength*blockheight-1);
     println(columns[i].ypos, columns[i].yflipped, columns[i].yend, columns[i].yflippedend);
   }
-  //  noLoop();
+   noLoop();
 }
 
 
@@ -43,9 +44,10 @@ void draw() {
 void keyPressed() {
   if (key == 'q') {
     exit();
-  } else {
-    loop();
-  }
+  } else if (key == 's') {
+    noLoop();
+  } else
+  loop();
 }
 
 void parallelogram(float x, float y, float x1, float y1, float x2, float y2) {
@@ -156,10 +158,9 @@ class Column {
       stroke(FG);
     }
     strokeWeight(1);
-    //rect(xpos, ypos+blockheight/2, blockwidth, blockheight); //background 
     noFill(); //***temp!
-    //   rect(xpos, ypos, blockwidth, blockheight); //outline 
-    rect(xflipped-blockwidth, yflippedend-blockheight, blockwidth, blockheight); 
+    //  rect(xpos, ypos, blockwidth, blockheight); //outline 
+  rect(xflipped-blockwidth, yflippedend-blockheight, blockwidth, blockheight); //flipped skeletonqs
     //noStroke();
     if (Zslash) {
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
@@ -171,8 +172,8 @@ class Column {
       }
       parallelogram(xpos+blockwidth/2, ypos+blockheight/2, blockwidth/2, blockheight/2, 0, blockheight/2); //little 
       parallelogram(xpos+blockwidth/2, ypos, blockwidth/2, blockheight/2, 0, blockheight/2); //little     
-      parallelogram(xpos, ypos, blockwidth/2, blockheight/2, 0, blockheight/2); //little     
-      rect(xpos+blockwidth/2, ypos+blockheight, blockwidth/2, blockheight/2); //background 
+      parallelogram(xpos, ypos, blockwidth/2, blockheight/2, 0, blockheight/2); //little
+      parallelogram(xpos+blockwidth/2, ypos+blockheight, blockwidth/2, blockheight/2, 0, blockheight/2); //background
       line(xflipped, yflippedend, xflipped-blockwidth, yflippedend-blockheight);
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
         fill(BG);  
@@ -182,8 +183,8 @@ class Column {
         stroke(BG);
       }
       parallelogram(xpos, ypos+blockheight/2, blockwidth/2, blockheight/2, 0, blockheight/2); //little 
-      rect(xpos, ypos+blockheight, blockwidth/2, blockheight/2); //background
-    } else {
+      parallelogram(xpos, ypos+blockheight, blockwidth/2, blockheight/2, 0, blockheight/2); //background
+    } else {  //Zslash is false
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
         fill(FG);  
         stroke(BG);
@@ -194,8 +195,8 @@ class Column {
       parallelogram(xpos+blockwidth/2, ypos+blockheight/2, blockwidth/2, -blockheight/2, 0, blockheight/2); //little 
       parallelogram(xpos, ypos+blockheight, blockwidth/2, -blockheight/2, 0, blockheight/2); //little 
       parallelogram(xpos+blockwidth/2, ypos+blockheight, blockwidth/2, -blockheight/2, 0, blockheight/2); //little 
-      rect(xpos+blockwidth/2, ypos+blockheight, blockwidth/2, blockheight/2); //background 
-      rect(xpos, ypos+blockheight, blockwidth/2, blockheight/2); //background
+      parallelogram(xpos+blockwidth/2, ypos+3*blockheight/2, blockwidth/2, -blockheight/2, 0, blockheight/2); // background 
+      parallelogram(xpos, ypos+3*blockheight/2, blockwidth/2, -blockheight/2, 0, blockheight/2); // background
       if ((stepnum + index + ((Zslash) ? 1 : 0)) % 2 == 0) {  //cast boolean Zslash to integer
         fill(BG);  
         stroke(FG);
